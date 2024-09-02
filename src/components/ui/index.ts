@@ -1,2 +1,2 @@
 export { Button } from './button';
-export {CheckBox} from './checkbox'
+export {Checkbox} from './checkbox'
