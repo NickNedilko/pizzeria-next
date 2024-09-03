@@ -32,11 +32,11 @@ export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
     const [showAll, setshowAll] = useState<boolean>(false);
 
     const [searchVAlue, setSearchValue] = useState<string>('');
-
-//   console.log(searchVAlue)
    const handleSearch = (value:string) => setSearchValue(value)
     
     const itemList = showAll? items: defaultItems?.slice(0, limit)
+
+    const filteredItemList = itemList.filter(item => item.text.toLocaleLowerCase().includes(searchVAlue.toLocaleLowerCase()));
 
     return (
         <div className={className}>
@@ -47,7 +47,7 @@ export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
             </div>}
 
             <div className='flex flex-col gap-4 max-h-96 overflow-auto scrollbar'>
-                {itemList.map((item, idx) => (
+                {filteredItemList.map((item, idx) => (
                     <FilterCheckbox 
                         key={idx}
                         text={item.text}

@@ -1,4 +1,4 @@
-import { Categories, Container, Filters, SortPopup, Title, TopBar } from "@/components";
+import { Categories, Container, Filters, ProductCard, SortPopup, Title, TopBar } from "@/components";
 import { Button } from "@/components/ui/button";
 
 
@@ -16,7 +16,9 @@ export default function Home() {
 
         </div>
         <div className="flex-1">
-          <div className="flex flex-col gap-16">List of products</div>
+          <div className="flex flex-col gap-16">
+            <ProductCard id={1} name="Діабло" price={250} imageUrl="https://img.postershop.me/7816/93f84259-92ed-4243-bdfd-d8554021c88f_image.png" />
+          </div>
         </div>
       </div>
     </Container>
