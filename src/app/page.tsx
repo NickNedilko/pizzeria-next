@@ -91,7 +91,7 @@ export default function Home() {
               
             }
             ]}
-            categoryId={2}
+            categoryId={3}
             />
           </div>
         </div>
