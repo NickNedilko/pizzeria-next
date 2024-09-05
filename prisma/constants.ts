@@ -126,12 +126,12 @@ export const products = [
     categoryId: 2,
   },
   {
-    name: 'Дэнвич ветчина и сир',
+    name: 'Денвіч ветчіна та сир',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE796FF0059B799A17F57A9E64C725.webp',
     categoryId: 3,
   },
   {
-    name: 'Курячі наггетси',
+    name: 'Курячі нагетси',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D618B5C7EC29350069AE9532C6E.webp',
     categoryId: 3,
   },
@@ -181,7 +181,7 @@ export const products = [
     categoryId: 5,
   },
   {
-    name: 'Кофе Кокосовий латте',
+    name: 'Кофе Кокосовий Лате',
     imageUrl: 'https://media.dodostatic.net/image/r:292x292/11EE7D61B19FA07090EE88B0ED347F42.webp',
     categoryId: 5,
   },
