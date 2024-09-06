@@ -24,6 +24,7 @@ const generateProductItem = ({
     pizzaType,
     size,
   } as Prisma.ProductItemUncheckedCreateInput;
+  
 };
 
 

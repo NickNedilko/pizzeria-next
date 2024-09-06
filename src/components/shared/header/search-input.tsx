@@ -19,12 +19,16 @@ export const SearchInput: React.FC<ISearchInputProps> = ({className}) => {
     const [searchProducts, setSearchProducts] = useState<Product[]>([]);
 
 
-    useDebounce(() => {
-        Api.products.search(query).then((items) => {
-            setSearchProducts(items)
-        })
+    useDebounce(async () => {
+        try {
+            const products = await Api.products.search(query)
+              setSearchProducts(products)
+        } catch (error) {
+            console.log(error)
+        }
+        }
         
-    }, 250,
+    , 250,
         [query]);
     
     const onClickItem = () => {
