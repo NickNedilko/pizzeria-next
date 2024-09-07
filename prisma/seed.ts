@@ -9,23 +9,23 @@ const randomPrice = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
 };
 
-const generateProductItem = ({
-  productId,
-  pizzaType,
-  size,
-}: {
-  productId: number;
-  pizzaType?: 1 | 2;
-  size?: 20 | 30 | 40;
-}) => {
-  return {
-    productId,
-    price: randomPrice(100, 350),
-    pizzaType,
-    size,
-  } as Prisma.ProductItemUncheckedCreateInput;
+// const generateProductItem = ({
+//   productId,
+//   pizzaType,
+//   size,
+// }: {
+//   productId: number;
+//   pizzaType?: 1 | 2;
+//   size?: 20 | 30 | 40;
+// }) => {
+//   return {
+//     productId,
+//     price: randomPrice(100, 350),
+//     pizzaType,
+//     size,
+//   } as Prisma.ProductItemUncheckedCreateInput;
   
-};
+// };
 
 
 
@@ -100,42 +100,73 @@ async function up() {
     
      await prisma.productItem.createMany({
     data: [
-      // Піцца "Пеппероні фреш"
-      generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 40 }),
+         // Піцца "Пеппероні фреш"
+         { productId: pizza1.id, price: randomPrice(100, 350), pizzaType: 1, size: 20 },
+         { productId: pizza1.id, price: randomPrice(100, 350),  pizzaType: 2, size: 30 },
+         { productId: pizza1.id, price: randomPrice(100, 350),  pizzaType: 2, size: 40 },
+      
+      // generateProductItem({ productId: pizza1.id, pizzaType: 1, size: 20 }),
+      // generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 30 }),
+      // generateProductItem({ productId: pizza1.id, pizzaType: 2, size: 40 }),
+  
+         // Піцца "Сирная"
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 1, size: 20 },
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 1, size: 30 },
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 1, size: 40 },
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 2, size: 20 },
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 2, size: 30 },
+         { productId: pizza2.id, price: randomPrice(100, 350),  pizzaType: 2, size: 40 },
+      // generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 20 }),
+      // generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
+      // generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 40 }),
+      // generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 20 }),
+      // generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
+      // generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 40 }),
 
-      // Піцца "Сирная"
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 1, size: 40 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 20 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza2.id, pizzaType: 2, size: 40 }),
+         // Піцца "Чорізо фреш"
+         { productId: pizza3.id, price: randomPrice(100, 350),  pizzaType: 1, size: 20 },
+         { productId: pizza3.id, price: randomPrice(100, 350),  pizzaType: 2, size: 30 },
+         { productId: pizza3.id, price: randomPrice(100, 350),  pizzaType: 2, size: 40 },
+      // generateProductItem({ productId: pizza3.id, pizzaType: 1, size: 20 }),
+      // generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
+      // generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 40 }),
 
-      // Піцца "Чорізо фреш"
-      generateProductItem({ productId: pizza3.id, pizzaType: 1, size: 20 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 30 }),
-      generateProductItem({ productId: pizza3.id, pizzaType: 2, size: 40 }),
-
-      // Інші продукти
-      generateProductItem({ productId: 1 }),
-      generateProductItem({ productId: 2 }),
-      generateProductItem({ productId: 3 }),
-      generateProductItem({ productId: 4 }),
-      generateProductItem({ productId: 5 }),
-      generateProductItem({ productId: 6 }),
-      generateProductItem({ productId: 7 }),
-      generateProductItem({ productId: 8 }),
-      generateProductItem({ productId: 9 }),
-      generateProductItem({ productId: 10 }),
-      generateProductItem({ productId: 11 }),
-      generateProductItem({ productId: 12 }),
-      generateProductItem({ productId: 13 }),
-      generateProductItem({ productId: 14 }),
-      generateProductItem({ productId: 15 }),
-      generateProductItem({ productId: 16 }),
-      generateProductItem({ productId: 17 }),
+         // Інші продукти
+      { productId: 1, price: randomPrice(100, 350) },
+      { productId: 2, price: randomPrice(100, 350) },
+      { productId: 3, price: randomPrice(100, 350) },
+      { productId: 4, price: randomPrice(100, 350) },
+      { productId: 5, price: randomPrice(100, 350) },
+      { productId: 6, price: randomPrice(100, 350) },
+      { productId: 7, price: randomPrice(100, 350) },
+      { productId: 8, price: randomPrice(100, 350) },
+      { productId: 9, price: randomPrice(100, 350) },
+      { productId: 10, price: randomPrice(100, 350) },
+      { productId: 11, price: randomPrice(100, 350) },
+      { productId: 12, price: randomPrice(100, 350) },
+      { productId: 13, price: randomPrice(100, 350) },
+      { productId: 14, price: randomPrice(100, 350) },
+      { productId: 15, price: randomPrice(100, 350) },
+      { productId: 17, price: randomPrice(100, 350) },
+      { productId: 16, price: randomPrice(100, 350) },
+      
+      // generateProductItem({ productId: 1 }),
+      // generateProductItem({ productId: 2 }),
+      // generateProductItem({ productId: 3 }),
+      // generateProductItem({ productId: 4 }),
+      // generateProductItem({ productId: 5 }),
+      // generateProductItem({ productId: 6 }),
+      // generateProductItem({ productId: 7 }),
+      // generateProductItem({ productId: 8 }),
+      // generateProductItem({ productId: 9 }),
+      // generateProductItem({ productId: 10 }),
+      // generateProductItem({ productId: 11 }),
+      // generateProductItem({ productId: 12 }),
+      // generateProductItem({ productId: 13 }),
+      // generateProductItem({ productId: 14 }),
+      // generateProductItem({ productId: 15 }),
+      // generateProductItem({ productId: 16 }),
+      // generateProductItem({ productId: 17 }),
     ],
   });
 
