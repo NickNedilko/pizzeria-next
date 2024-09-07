@@ -9,26 +9,30 @@ type Item = IFilterCheckboxProps;
 
 interface ICheckboxFilterGroupProps {
     title: string;
+    name: string;
     items: Item[];
-    defaultItems: Item[];
+    defaultItems?: Item[];
     limit?: number;
-    loading: boolean,
+    loading?: boolean,
     searchInputPlaceholder?: string;
-    onChange?: (values: string[]) => void;
+    onClickCheckbox?: (id: string) => void;
     defaultValue?: string[]
     className?: string;
+    selectedIds?: Set<string>;
 
 }
 
 export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
     title,
+    name,
     items,
     defaultItems,
     limit = 3,
     searchInputPlaceholder = 'Пошук...',
     className,
     loading,
-    onChange,
+    onClickCheckbox,
+    selectedIds,
     defaultValue
 }) => {
 
@@ -36,7 +40,7 @@ export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
     const [searchVAlue, setSearchValue] = useState<string>('');
    const handleSearch = (value:string) => setSearchValue(value)
     
-    const itemList = showAll? items: defaultItems?.slice(0, limit)
+    const itemList = showAll? items: (defaultItems || items)?.slice(0, limit)
 
     const filteredItemList = itemList.filter(item => item.text.toLocaleLowerCase().includes(searchVAlue.toLocaleLowerCase()));
 
@@ -44,7 +48,9 @@ export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
         return (
             <div className={className}>
                 <p className='font-bold mb-3'>{title}</p>
-                 {Array(limit).fill(0).map((_, idx) => <Skeleton key={idx} className='h-6 mb-4 rounded-[8px]'/>)}
+                {Array(limit).fill(0).map((_, idx) => <Skeleton key={idx} className='h-6 mb-4 rounded-[8px]' />)}
+                <Skeleton  className='w-28 h-6 mb-4 rounded-[8px]'/>
+
             </div>
         )
     }
@@ -61,11 +67,12 @@ export const CheckboxFilterGroup: React.FC<ICheckboxFilterGroupProps> = ({
                 {filteredItemList.map((item, idx) => (
                     <FilterCheckbox 
                         key={idx}
+                        name={name}
                         text={item.text}
                         value={item.value}
                         endAdornment={item.endAdornment}
-                        checked={false}
-                        onCheckedChange={(idx)=>console.log(idx)}
+                        checked={selectedIds?.has(item.value)}
+                        onCheckedChange={()=>onClickCheckbox?.(item.value)}
                     />  
                 ))}
                  {items.length > limit && (

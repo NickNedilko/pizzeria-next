@@ -2,13 +2,23 @@
 import { Api } from '@/services/api-client';
 import { Ingridient } from '@prisma/client';
 
-import React from 'react';
+import {useEffect, useState} from 'react';
+import { useSet } from 'react-use';
 
-export const useIngridients = () => {
-  const [ingridients, setIngridients] = React.useState<Ingridient[]>([]);
-  const [loading, setLoading] = React.useState(true);
+interface ReturnProps {
+  ingridients: Ingridient[];
+  loading: boolean;
+  selectedIds: Set<string>;
+  onAddId: (id: string) => void;
+}
 
-  React.useEffect(() => {
+export const useIngridients = ():ReturnProps => {
+  const [ingridients, setIngridients] = useState<Ingridient[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const [selectedIds, {toggle}] = useSet<string>(new Set([]))
+
+  useEffect(() => {
     async function fetchIngridients() {
       try {
         setLoading(true);
@@ -27,5 +37,6 @@ export const useIngridients = () => {
   return {
     ingridients,
     loading,
+    onAddId: toggle, selectedIds
   };
 };
