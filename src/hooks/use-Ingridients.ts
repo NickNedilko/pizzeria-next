@@ -1,24 +1,14 @@
+import { Api } from "@/services/api-client";
+import { Ingridient } from "@prisma/client";
+import { useEffect, useState } from "react";
 
-import { Api } from '@/services/api-client';
-import { Ingridient } from '@prisma/client';
 
-import {useEffect, useState} from 'react';
-import { useSet } from 'react-use';
+export const useIngridients = () => {
+    const [ingridients, setIngridients] = useState<Ingridient[]>([]);
+    const [loading, setLoading] = useState(true);
+    
 
-interface ReturnProps {
-  ingridients: Ingridient[];
-  loading: boolean;
-  selectedIds: Set<string>;
-  onAddId: (id: string) => void;
-}
-
-export const useIngridients = ():ReturnProps => {
-  const [ingridients, setIngridients] = useState<Ingridient[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const [selectedIds, {toggle}] = useSet<string>(new Set([]))
-
-  useEffect(() => {
+    useEffect(() => {
     async function fetchIngridients() {
       try {
         setLoading(true);
@@ -32,11 +22,7 @@ export const useIngridients = ():ReturnProps => {
     }
 
     fetchIngridients();
-  }, []);
-
-  return {
-    ingridients,
-    loading,
-    onAddId: toggle, selectedIds
-  };
-};
+    }, []);
+    
+    return {loading, ingridients}
+}

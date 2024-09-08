@@ -1,43 +1,24 @@
 'use client'
 
-import {useState} from 'react';
 import { Title } from './title';
-import { FilterCheckbox } from './filter-checkbox';
 import { Input } from '../ui';
 import { CheckboxFilterGroup } from './checkbox-filters-group';
-import { useIngridients } from '@/hooks/use-Ingridients';
-import { useSet } from 'react-use';
+import { useIngridients, useFilters, useQueryFilters } from '@/hooks';
 
 
 interface IFiltersProps {
     className?: string
 }
 
-interface PriceProps {
-    priceFrom: number;
-    priceTo: number;
-}
-
-
 export const Filters: React.FC<IFiltersProps> = ({ className }) => {
-      const { ingridients, loading, onAddId, selectedIds } = useIngridients();
-      const [prices, setPrice] = useState<PriceProps>({priceFrom:0, priceTo:500})  
-
-    const [sizes, { toggle: toggleSizes }] = useSet<string>(new Set([]));
-    const [types, { toggle: toggleTypes }] = useSet<string>(new Set([]));
-
-    
+    const { loading, ingridients } = useIngridients();
+    const { selectedIngridients, toggleIngridients, prices, updatePrices, sizes, toggleSizes, pizzaTypes, togglePizzaTypes } = useFilters();
     
      const allIngridients = ingridients.map((item) => ({ value: String(item.id), text: item.name }));
 
-     
+    const filters = {selectedIngridients, prices, sizes, pizzaTypes}
+     useQueryFilters(filters)
     
-    const updatePrice = (name: keyof PriceProps, value: number) => {
-        setPrice({
-            ...prices,
-            [name]:value
-         })
-     }      
     return (
         <div className={className}>
             <Title text='Фільтрація' size='sm' className='font-bold mb-5' />
@@ -45,10 +26,10 @@ export const Filters: React.FC<IFiltersProps> = ({ className }) => {
                     title='Тип тіста'
                     name='type'
                     className='mb-5'
-                onClickCheckbox={toggleTypes}
-                selectedIds={types}
+                onClickCheckbox={togglePizzaTypes}
+                selectedIds={pizzaTypes}
                 items={[
-                    {text: 'Тонке', value: "1" },
+                    {text: 'Тонке', value: "1"  },
                     {text:'Товсте', value: "2"}
             ]}  
              />  
@@ -74,7 +55,7 @@ export const Filters: React.FC<IFiltersProps> = ({ className }) => {
                         min={0}
                         max={500}
                         value={String(prices.priceFrom)}
-                    onChange={(e)=>updatePrice('priceFrom', Number(e.target.value))}
+                    onChange={(e)=>updatePrices('priceFrom', Number(e.target.value))}
                     />
                     <Input
                         type='number'
@@ -82,7 +63,7 @@ export const Filters: React.FC<IFiltersProps> = ({ className }) => {
                         placeholder='500'
                         max={500}
                         value={String(prices.priceTo)}
-                        onChange={(e)=>updatePrice('priceTo', Number(e.target.value))}
+                        onChange={(e)=>updatePrices('priceTo', Number(e.target.value))}
                     />
                 </div>
 
@@ -94,8 +75,8 @@ export const Filters: React.FC<IFiltersProps> = ({ className }) => {
                     defaultItems={allIngridients.slice(0,6)}
                     items={allIngridients}
                     loading={loading}
-                    onClickCheckbox={onAddId}
-                    selectedIds={selectedIds}
+                    onClickCheckbox={toggleIngridients}
+                    selectedIds={selectedIngridients}
                 />
             </div>
         </div>
