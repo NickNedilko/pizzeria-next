@@ -9,6 +9,7 @@
     "lint": "next lint",
     "prisma:push": "prisma db push",
     "prisma:generate": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "prisma:studio": "prisma studio",
     "prisma:seed": "prisma db seed"
   },
