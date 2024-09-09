@@ -1,5 +1,5 @@
 import { Container, Filters, ProductsGroupList,  Title, TopBar } from "@/components";
-import { prisma } from "../../prisma/prisma-client";
+import { prisma } from "../../../prisma/prisma-client";
 
 
 

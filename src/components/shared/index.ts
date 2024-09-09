@@ -11,3 +11,4 @@ export { ProductsGroupList } from './products-group-list';
 export { ProductImage } from './product-image';
 export {GroupVariants} from './group-variants'
 export * from './header';
+export * from './modals'

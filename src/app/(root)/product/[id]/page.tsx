@@ -1,6 +1,6 @@
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import * as React from 'react';
-import { prisma } from '../../../../prisma/prisma-client';
+import { prisma } from '../../../../../prisma/prisma-client';
 import { Container, GroupVariants, ProductImage, Title } from '@/components';
 import { notFound } from 'next/navigation';
 
