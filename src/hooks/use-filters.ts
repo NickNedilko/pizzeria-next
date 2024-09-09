@@ -35,7 +35,8 @@ export const useFilters = ():ReturnProps => {
 const searchParams = useSearchParams() as unknown as Map<keyof QueryFilters, string>;
 /* Фильтр ингридиентов */
   const [selectedIngridients, {toggle: toggleIngridients}] = useSet(new Set<string>(searchParams.get('ingridients')?.split(',')))
-/* Фильтр цен */
+    
+    /* Фильтр цен */
     const [prices, setPrice] = useState<PriceProps>({
         priceFrom: Number(searchParams.get('priceFrom')) || undefined,
         priceTo: Number(searchParams.get('priceTo')) || undefined
