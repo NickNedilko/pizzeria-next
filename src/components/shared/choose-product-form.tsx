@@ -7,13 +7,12 @@ interface IChooseProductFormProps {
     imageUrl: string;
     name: string;
     className?: string;
-    ingridients: any[];
     items?: any[];
     onClickAdd?: () => void;
 }
 
-export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, ingridients, items, onClickAdd, className}) => {
-    const textDetails = '30 см, традицыйне тысто 30'
+export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, items, onClickAdd, className}) => {
+    
     const totalPrice = 275;
     
     return (
@@ -26,9 +25,9 @@ export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imag
     
             <div className='w-[490px]  bg-[#f7f6f5] p-7'>
                 <Title text={name} size='md' className='font-extrabold m-1' />
-                <p className='text-gray-400'>{textDetails}</p>
+              
                 <Button
-                    className='h-[55px] px-10 text-base rounded-[18px] w-full'>
+                    className='h-[55px] px-10 text-base rounded-[18px] w-full mt-5'>
                     Додати до корзини за {totalPrice} ₴
                 </Button>
             </div>
