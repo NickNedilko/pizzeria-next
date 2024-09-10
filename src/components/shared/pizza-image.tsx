@@ -1,14 +1,14 @@
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 
-interface IProductImageProps {
+interface IPizzaImageProps {
     className?: string;
     imageUrl: string;
     name: string;
-    size: number;
+    size: 20| 30 |40;
 }
 
-export const ProductImage: React.FC<IProductImageProps> = ({className, imageUrl, name, size}) => {
+export const PizzaImage: React.FC<IPizzaImageProps> = ({className, imageUrl, name, size}) => {
     return (
         <div className={cn('flex items-center justify-center flex-1 relative w-full', className)}>
             <img

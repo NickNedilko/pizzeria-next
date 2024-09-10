@@ -14,6 +14,7 @@ interface IProductCardProps {
 }
 
 export const ProductCard: React.FC<IProductCardProps> = ({id, name, price, imageUrl, className}) => {
+   
     return (
         <div className={className}>
             <Link href={`/product/${id}`}>

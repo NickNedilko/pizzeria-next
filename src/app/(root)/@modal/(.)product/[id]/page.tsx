@@ -24,6 +24,7 @@ const ProductModalPage: React.FC<IProductModalPageProps> = async ({ params }) =>
         },
    })
 
+    console.log(product)
     if (!product) {
         return notFound();
     }

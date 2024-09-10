@@ -29,6 +29,7 @@ export const ProductsGroupList: React.FC<IProductsGroupListProps> = ({ title, pr
     }
     }, [intersection?.isIntersecting, title, categoryId, setActiveId])
 
+   
     return (
         <div className={className} id={title} ref={intersectionRef}>
             <Title text={title} size='lg' className='font-extrabold mb-5' />
@@ -39,7 +40,7 @@ export const ProductsGroupList: React.FC<IProductsGroupListProps> = ({ title, pr
                         id={product.id}
                         name={product.name}
                         imageUrl={product.imageUrl}
-                        price={product.price}
+                        price={product.items[0].price}
                     />
                 ))}
           </div>
