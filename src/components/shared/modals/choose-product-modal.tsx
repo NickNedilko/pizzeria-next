@@ -20,13 +20,18 @@ interface IChooseProductModalProps {
 
  export const ChooseProductModal: React.FC<IChooseProductModalProps> = ({className, product}) => {
      const router = useRouter();
-    //  console.log(product.indridients)
+    
      const isPizzaForm = Boolean(product.items[0].pizzaType);
      return (
          <Dialog open={Boolean(product)} onOpenChange={()=>router.back()}>
              <DialogContent className={cn('p-0 min-w-[1060px] w-[1060px] min-h-[500px] bg-white overflow-hidden', className)}>
-                 {isPizzaForm ? <ChoosePizzaForm className='flex' name={product.name} imageUrl={product.imageUrl} ingridients={product.ingridients}/> :
-                     <ChooseProductForm className='flex' name={product.name} imageUrl={product.imageUrl} ingridients={product.ingridients} />}
+                 {isPizzaForm ? <ChoosePizzaForm
+                     className='flex'
+                     name={product.name}
+                     imageUrl={product.imageUrl}
+                     items={product.items}
+                     ingridients={product.ingridients} /> :
+                     <ChooseProductForm className='flex' name={product.name} imageUrl={product.imageUrl}  />}
              </DialogContent> 
       </Dialog>
   ) ;
