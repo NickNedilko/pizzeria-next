@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils';
 import * as React from 'react';
 
-type Variant = {
+export type Variant = {
     name: string;
     value: string;
     disabled?: boolean;
