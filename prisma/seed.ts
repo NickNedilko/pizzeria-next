@@ -1,7 +1,7 @@
 import { hashSync } from "bcrypt";
 import { prisma } from "./prisma-client";
 import { error } from "console";
-import { ingredients, categories, products } from "./constants";
+import { ingridients, categories, products } from "./constants";
 import { Prisma } from "@prisma/client";
 
 
@@ -55,7 +55,7 @@ async function up() {
     })
 
       await prisma.ingridient.createMany({
-        data: ingredients
+        data: ingridients
       })
     
       await prisma.product.createMany({
@@ -69,7 +69,7 @@ async function up() {
         'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
       categoryId: 1,
       ingridients: {
-        connect: ingredients.slice(0, 5),
+        connect: ingridients.slice(0, 5),
       },
     },
   });
@@ -81,7 +81,7 @@ async function up() {
         'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
       categoryId: 1,
       ingridients: {
-        connect: ingredients.slice(5, 10),
+        connect: ingridients.slice(5, 10),
       },
     },
   });
@@ -93,7 +93,7 @@ async function up() {
         'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
       categoryId: 1,
       ingridients: {
-        connect: ingredients.slice(10, 40),
+        connect: ingridients.slice(10, 40),
       },
     },
   });
@@ -190,7 +190,7 @@ async function up() {
       productItemId: 1,
       cartId: 1,
       quantity: 2,
-      ingredients: {
+      ingridients: {
         connect: [{ id: 1 }, { id: 2 }, { id: 3 }],
       },
     },
