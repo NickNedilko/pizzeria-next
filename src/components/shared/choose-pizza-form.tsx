@@ -19,21 +19,26 @@ interface IChoosePizzaFormProps {
     className?: string;
     ingridients: Ingridient[];
     items: ProductItem[];
-    onClickAddCart?: () => void;
+    onSubmit: (itemId: number, ingridients: number[]) => void;
+
 }
 
-export const ChoosePizzaForm: React.FC<IChoosePizzaFormProps> = ({name, imageUrl, ingridients, items, onClickAddCart, className}) => {
+export const ChoosePizzaForm: React.FC<IChoosePizzaFormProps> = ({
+    name,
+    imageUrl,
+    ingridients,
+    items,
+    onSubmit,
+    className }) => {
     
-    const { size, type, setSize, setType, availableSizes, selectedIngridients, addIngridient } = usePizzaOptions(items);
+    const { size, type, setSize, setType, availableSizes, selectedIngridients, addIngridient, currentItemId } = usePizzaOptions(items);
     const totalPrice = CalcTotalPizzaPrice(items, ingridients, type, size, selectedIngridients);
     const textDetails = `${size} см, ${(mapPizzaType[type]).toLocaleLowerCase()} тісто`;
     const handleClickAdd = () => {
-        onClickAddCart?.();
-        console.log({
-            size,
-            type,
-            ingridients: selectedIngridients
-        });
+        if (currentItemId) {
+        onSubmit(currentItemId, Array.from(selectedIngridients));
+        }
+      
     }
 
  

@@ -8,13 +8,14 @@ import { ProductItem } from '@prisma/client';
 interface IChooseProductFormProps {
     imageUrl: string;
     name: string;
+    price: number;
     className?: string;
-    onClickAdd?: () => void;
+    onSubmit?: () => void;
 }
 
-export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, items, onClickAdd, className}) => {
+export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, price, onSubmit, className}) => {
     
-    const totalPrice = 275;
+     
     
     return (
         <div className={cn('flex, flex-1', className)}>
@@ -28,8 +29,9 @@ export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imag
                 <Title text={name} size='md' className='font-extrabold m-1' />
               
                 <Button
+                    onClick={onSubmit}
                     className='h-[55px] px-10 text-base rounded-[18px] w-full mt-5'>
-                    Додати до корзини за {totalPrice} ₴
+                    Додати до корзини за {price} ₴
                 </Button>
             </div>
         </div>

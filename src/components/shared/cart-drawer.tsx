@@ -48,7 +48,7 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }
                 <div className='-mx-6 mt-5 overflow-auto flex-1'>
                     <div className='mb-2'>
                         {items.map((item) => (
-                            <CartDrawerItem key={item.id}
+                            <CartDrawerItem className='mb-2' key={item.id}
                             id={item.id}
                             imageUrl={item.imageUrl}
                             details={item.pizzaSize ? getCartItemDetails(item.pizzaType as PizzaType, item.pizzaSize as PizzaSize, item.ingridients) : ''}

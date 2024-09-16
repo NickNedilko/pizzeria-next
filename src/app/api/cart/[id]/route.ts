@@ -71,6 +71,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     return NextResponse.json(updatedUserCart);
   } catch (error) {
     console.log('[CART_DELETE] Server error', error);
-    return NextResponse.json({ message: 'Не удалось удалить корзину' }, { status: 500 });
+    return NextResponse.json({ message: 'Не вдалося видалити товар з корзини' }, { status: 500 });
   }
 }
