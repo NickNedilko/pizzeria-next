@@ -24,15 +24,19 @@ interface Props {
 }
 
 export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }) => {
-    const [totalAmount, fetchCartItems, items  ] = useCartStore(state=> [state.totalAmount, state.fetchCartItems, state.items]);
+    const [totalAmount, fetchCartItems,  items, updateItemQuantity, deleteCartItem] = useCartStore(state =>
+        [state.totalAmount, state.fetchCartItems, state.items, state.updateItemQuantity, state.deleteCartItem]);
  
     useEffect(() => {
         fetchCartItems();
 
-    }, [fetchCartItems])
+    }, [])
     
-   
-    console.log(items)
+   const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
+    updateItemQuantity(id, newQuantity);
+  };
+    
     
     return (
         <Sheet>
@@ -50,16 +54,12 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }
                             details={item.pizzaSize ? getCartItemDetails(item.pizzaType as PizzaType, item.pizzaSize as PizzaSize, item.ingridients) : ''}
                         name={item.name}
                         price={item.price}
-                        quantity={item.quantity} />
+                                quantity={item.quantity}
+                                onClickCountButton={(type) => onClickCountButton(item.id, item.quantity, type)}
+                                onClickDelete={()=>deleteCartItem(item.id)}
+                            />
                         ))}
                     </div>
-                    <CartDrawerItem
-                        id={0}
-                        details={'цыпля'}
-                        imageUrl={'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp'}
-                        name={'пицца'}
-                        price={10}
-                        quantity={30} />
                    </div>
                        
                 <SheetFooter className='-mx-6 bg-white p-8'>
