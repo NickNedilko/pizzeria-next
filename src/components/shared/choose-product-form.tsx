@@ -9,11 +9,12 @@ interface IChooseProductFormProps {
     imageUrl: string;
     name: string;
     price: number;
+    loading?: boolean;
     className?: string;
     onSubmit?: () => void;
 }
 
-export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, price, onSubmit, className}) => {
+export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imageUrl, price, onSubmit, loading, className}) => {
     
      
     
@@ -29,6 +30,7 @@ export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imag
                 <Title text={name} size='md' className='font-extrabold m-1' />
               
                 <Button
+                    loading={loading}
                     onClick={onSubmit}
                     className='h-[55px] px-10 text-base rounded-[18px] w-full mt-5'>
                     Додати до корзини за {price} ₴

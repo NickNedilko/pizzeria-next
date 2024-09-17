@@ -16,6 +16,7 @@ import { usePizzaOptions } from '@/hooks';
 interface IChoosePizzaFormProps {
     imageUrl: string;
     name: string;
+    loading?: boolean;
     className?: string;
     ingridients: Ingridient[];
     items: ProductItem[];
@@ -28,6 +29,7 @@ export const ChoosePizzaForm: React.FC<IChoosePizzaFormProps> = ({
     imageUrl,
     ingridients,
     items,
+    loading,
     onSubmit,
     className }) => {
     
@@ -76,7 +78,8 @@ export const ChoosePizzaForm: React.FC<IChoosePizzaFormProps> = ({
                 </div> 
                </div>
                 <Button
-                onClick={handleClickAdd}
+                    loading={loading}
+                    onClick={handleClickAdd}
                     className='h-[55px] px-10  mt-5 text-base rounded-[18px] w-full'>
                     Додати до корзини за {totalPrice} ₴
                 </Button>

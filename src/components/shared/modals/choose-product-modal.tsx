@@ -11,6 +11,7 @@ import { ChooseProductForm } from '../choose-product-form';
 import { IProduct } from '@/@types/prisma';
 import { ChoosePizzaForm } from '../choose-pizza-form';
 import { useCartStore } from '@/store/cart';
+import toast from 'react-hot-toast';
 
 
 
@@ -24,18 +25,25 @@ interface IChooseProductModalProps {
      const firstItem = product.items[0]
      const isPizzaForm = Boolean(firstItem.pizzaType);
 
-     const addCartItem = useCartStore(state=>state.addCartItem)
+     const [addCartItem, loading] = useCartStore(state=>[state.addCartItem, state.loading])
      
      const onAddProduct = () => {
          addCartItem({
              productItemId: firstItem.id
          })
       }
-     const onAddPizza = (productItemId: number, ingridients: number[]) => {
-         addCartItem({
+     const onAddPizza = async (productItemId: number, ingridients: number[]) => {
+        try {
+             await addCartItem({
              productItemId: firstItem.id,
              ingridients
-         })
+             })
+            toast.success('Товар успішно додано до корзини')
+            router.back();
+        } catch (error) {
+            console.log(error);
+            toast.error('Товар не додано до корзини')
+        }
       }
 
      
@@ -49,7 +57,8 @@ interface IChooseProductModalProps {
                      imageUrl={product.imageUrl}
                      items={product.items}
                      ingridients={product.ingridients}
-                    onSubmit={onAddPizza}
+                     onSubmit={onAddPizza}
+                     loading = {loading}
                  /> :
                      <ChooseProductForm
                          className='flex'
@@ -57,6 +66,8 @@ interface IChooseProductModalProps {
                          imageUrl={product.imageUrl}
                          onSubmit={onAddProduct}
                          price={firstItem.price}
+                         loading = {loading}
+
                      />}
              </DialogContent> 
       </Dialog>

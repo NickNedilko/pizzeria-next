@@ -34,7 +34,7 @@ const currentItemId = items.find((item)=>item.pizzaType === type && size === ite
         
         const availableSize = availableSizes?.find(item => !item.disabled)
         
-        if (isAvailableSize && availableSize) {
+        if (!isAvailableSize && availableSize) {
         setSize(Number(availableSize.value) as PizzaSize)
     }
      }, [type])
