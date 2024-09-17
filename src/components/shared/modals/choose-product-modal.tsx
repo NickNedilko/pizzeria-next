@@ -27,10 +27,17 @@ interface IChooseProductModalProps {
 
      const [addCartItem, loading] = useCartStore(state=>[state.addCartItem, state.loading])
      
-     const onAddProduct = () => {
-         addCartItem({
+     const onAddProduct = async () => {
+        try {
+             addCartItem({
              productItemId: firstItem.id
-         })
+             })
+             toast.success('Товар успішно додано до корзини')
+            router.back();
+        } catch (error) {
+            console.log(error);
+            toast.error('Товар не додано до корзини')
+        }
       }
      const onAddPizza = async (productItemId: number, ingridients: number[]) => {
         try {

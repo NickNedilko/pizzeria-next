@@ -5,7 +5,6 @@ import { IoIosArrowRoundForward } from "react-icons/io"
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetFooter,
   SheetHeader,
   SheetTitle,
@@ -30,7 +29,7 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }
     useEffect(() => {
         fetchCartItems();
 
-    }, [])
+    }, [fetchCartItems])
     
    const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
     const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;

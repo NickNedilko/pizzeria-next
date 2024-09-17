@@ -31,7 +31,7 @@ export const ChooseProductForm: React.FC<IChooseProductFormProps> = ({name, imag
               
                 <Button
                     loading={loading}
-                    onClick={onSubmit}
+                    onClick={()=>onSubmit?.()}
                     className='h-[55px] px-10 text-base rounded-[18px] w-full mt-5'>
                     Додати до корзини за {price} ₴
                 </Button>
