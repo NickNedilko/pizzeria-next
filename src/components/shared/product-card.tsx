@@ -4,16 +4,19 @@ import * as React from 'react';
 import { GoPlus } from "react-icons/go";
 import { Title } from './title';
 import { Button } from '../ui';
+import { IProduct } from '@/@types/prisma';
+import { Ingridient } from '@prisma/client';
 
 interface IProductCardProps {
     id: number;
     name: string;
     price: number;
+    ingridients: Ingridient[];
     imageUrl: string;
     className?: string;
 }
 
-export const ProductCard: React.FC<IProductCardProps> = ({id, name, price, imageUrl, className}) => {
+export const ProductCard: React.FC<IProductCardProps> = ({id, name, price, ingridients, imageUrl, className}) => {
    
     return (
         <div className={className}>
@@ -24,7 +27,7 @@ export const ProductCard: React.FC<IProductCardProps> = ({id, name, price, image
                 <Title text={name} size='sm' className='mv-1 mt-3 font-bold' />
 
                 <p className='text-sm text-gray-400'>
-                 Курча, моцарела, сири чедер і пармезан, сирний соус, томати, чеснок
+                {ingridients.map((ingridient)=>ingridient.name).join(', ')}
                 </p>
                 <div className='flex justify-between items-center mt-4'>
                     <span className='text-[20px]'>

@@ -30,7 +30,7 @@ export const Filters: React.FC<IFiltersProps> = ({ className }) => {
                 selectedIds={pizzaTypes}
                 items={[
                     {text: 'Тонке', value: "1"  },
-                    {text:'Товсте', value: "2"}
+                    {text:'Традиційне', value: "2"}
             ]}  
              />  
 
