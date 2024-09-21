@@ -2,6 +2,7 @@ import { getCartDetails } from "@/lib";
 import { CartStateItem } from "@/lib/get-cart-details";
 import { Api } from "@/services/api-client";
 import { CreateCartItemValues } from "@/services/dto/cart.dto";
+import { error } from "console";
 import { create } from "zustand";
 
 
@@ -50,14 +51,23 @@ export const useCartStore = create<CartState>((set) => ({
 
    deleteCartItem: async (id: number) => {
     try {
-      set({ loading: true, error: false });
+      set((state) => ({
+        loading: true,
+        error: false,
+        items: state.items.map((item) =>
+          (item.id === id) ? { ...item, disabled: true } : item)
+      }));
       const data = await Api.cart.deleteCartItem(id);
       set(getCartDetails(data));
     } catch (error) {
       console.error(error);
       set({ error: true });
     } finally {
-      set({ loading: false });
+      set((state) => ({
+        loading: false,
+        items: state.items.map((item) =>
+          (item.id === id) ? { ...item, disabled: false } : item)
+      }));
     }
    },
     
