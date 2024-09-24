@@ -20,8 +20,6 @@ import Image from 'next/image';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
 import { useCart } from '@/hooks';
-import { useRouter } from 'next/navigation';
-
 
 interface Props {
     className?: string;
@@ -30,9 +28,6 @@ interface Props {
 export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }) => {
     
     const {totalAmount,  items, onClickCountButton, deleteCartItem } = useCart();
-    const router = useRouter();
- 
-    
     
     return (
         <Sheet>
@@ -89,9 +84,8 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }
                             </span>
                             <span className='font-bold text-lg'>{totalAmount} ₴</span>
                         </div>
-                        <Link href='/cart'>
+                        <Link href='/checkout'>
                                     <Button
-                                        onClick={() => router.push('/checkout')}
                             type='submit'
                             className='w-full h-12 text-base'>
                             Оформити замовлення
