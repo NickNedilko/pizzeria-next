@@ -10,16 +10,18 @@ import { Container, HeaderNav, Logo, SearchInput } from '..';
 
 
 interface IHeaderProps {
+    hasSearch?: boolean;
+    hasCart?: boolean;
     className?: string;
 }
 
-export const Header: React.FunctionComponent<IHeaderProps> = ({className}) => {
+export const Header: React.FunctionComponent<IHeaderProps> = ({className, hasSearch, hasCart}) => {
     return (
-        <header className={cn('border border-b', className)}>
+        <header className={cn('border-b', className)}>
             <Container className='flex items-center justify-between py-8'>
                 <Logo />
-                <SearchInput/>
-                <HeaderNav/>
+                {hasSearch && <SearchInput/>}
+                <HeaderNav cart={hasCart } />
             </Container>
       </header>
   );

@@ -14,12 +14,13 @@ import {
 import Link from 'next/link';
 import { Button } from '../ui';
 import { CartDrawerItem } from './cart-drawer-item';
-import { useCartStore } from '@/store/cart';
 import { getCartItemDetails } from '@/lib';
 import { PizzaSize, PizzaType } from '@/constants/pizza';
 import Image from 'next/image';
 import { Title } from './title';
 import { cn } from '@/lib/utils';
+import { useCart } from '@/hooks';
+import { useRouter } from 'next/navigation';
 
 
 interface Props {
@@ -27,18 +28,10 @@ interface Props {
 }
 
 export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }) => {
-    const [totalAmount, fetchCartItems,  items, updateItemQuantity, deleteCartItem] = useCartStore(state =>
-        [state.totalAmount, state.fetchCartItems, state.items, state.updateItemQuantity, state.deleteCartItem]);
- 
-    useEffect(() => {
-        fetchCartItems();
-
-    }, [fetchCartItems])
     
-   const onClickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
-    const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1;
-    updateItemQuantity(id, newQuantity);
-  };
+    const {totalAmount,  items, onClickCountButton, deleteCartItem } = useCart();
+    const router = useRouter();
+ 
     
     
     return (
@@ -97,7 +90,8 @@ export const CartDrawer: FC<PropsWithChildren<Props>> = ({ children, className }
                             <span className='font-bold text-lg'>{totalAmount} ₴</span>
                         </div>
                         <Link href='/cart'>
-                           <Button
+                                    <Button
+                                        onClick={() => router.push('/checkout')}
                             type='submit'
                             className='w-full h-12 text-base'>
                             Оформити замовлення

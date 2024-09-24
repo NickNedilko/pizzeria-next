@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
         <main className="min-h-screen">
-          <Header/>
+          <Header hasSearch hasCart/>
       {children}
       {modal}
         </main>
