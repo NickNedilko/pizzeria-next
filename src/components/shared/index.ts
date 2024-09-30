@@ -19,7 +19,10 @@ export { WhiteBlock } from './white-block';
 export { CheckoutItem } from './checkout-item';
 export { CheckoutItemDetails } from './checkout-item-details';
 export { CheckoutSkeleton } from './checkout-skeleton';
-export {CheckoutCartPrice} from './checkout-cart-price'
+export { CheckoutCartPrice } from './checkout-cart-price';
+export { ClearButton } from './clear-button';
+export { ErrorText } from './error-text';
 // export { CountButton } from './count-button';
 export * from './header';
-export * from './modals'
+export * from './modals';
+export * from './form';
