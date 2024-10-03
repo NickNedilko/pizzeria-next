@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { WhiteBlock } from "../white-block";
-import { Input, Textarea } from "@/components/ui";
+import { FormInput, FormTextarea } from "../form";
 
 
 interface ICheckoutAddressFormProps {
@@ -8,16 +8,20 @@ interface ICheckoutAddressFormProps {
 }
 
 
-export const CheckoutAddressForm:FC <ICheckoutAddressFormProps> = ({className}) => {
+export const CheckoutAddressForm: FC<ICheckoutAddressFormProps> = ({ className }) => {
+    
+    
+
     return (
                           <WhiteBlock title='3. Адреса доставки' className={className}>
                 <div className='flex flex-col gap-5'>
-                <Input name='adress' className='text-base' placeholder="Адреса доставки" />
-                            <Textarea
-                                placeholder='Комментар до замовлення'
-                                className='text-base'
-                            rows={5}
-                            />
+                <FormInput name='address' className='text-base' placeholder="Адреса доставки" />
+                <FormTextarea
+                    name="comment"
+                    className='text-base'
+                    placeholder='Комментар до замовлення'
+                    rows={5}
+                />
                 </div>
             </WhiteBlock>
   ) ;
