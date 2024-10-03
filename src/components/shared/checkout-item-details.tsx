@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 
 interface Props {
-    title?: React.ReactNode;
-    value?: number;
+    title?: ReactNode;
+    value?: number | ReactNode;
     className?: string;
 }
 
@@ -14,7 +14,7 @@ export const CheckoutItemDetails:FC<Props> = ({className, title, value}) => {
                 {title}:
                 <div className='flex-1 border-b border-dashed border-b-neutral-200'/>
             </span>
-            <span className='font-bold text-lg'>{value} ₴</span>
+            <span className='font-bold text-lg'>{value}</span>
         </div>
     )
 }

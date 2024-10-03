@@ -7,6 +7,7 @@ import {  CheckoutCartPrice, CheckoutItem,  CheckoutSkeleton, Container, FormInp
 import { useCart } from '@/hooks';
 import { CheckoutAddressForm, CheckoutCart, CheckoutPersonalForm } from '@/components/shared/checkout';
 import { checkoutFormSchema, CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
+import { cn } from '@/lib/utils';
 
 
 
@@ -47,11 +48,12 @@ const CheckooutPage: FC<ICheckooutPageProps> = (props) => {
                         onClickCountButton={onClickCountButton }
                         deleteCartItem={deleteCartItem}/>
 
-            <CheckoutPersonalForm />
-            <CheckoutAddressForm/>
+            <CheckoutPersonalForm className={true? 'opacity-40 pointer-events-none' : ''} />
+                            <CheckoutAddressForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
+                            
                 </div>
                 <div className='w-[450px]'>
-                    <CheckoutCartPrice totalAmount={totalAmount}/>
+                            <CheckoutCartPrice totalAmount={totalAmount} loading={loading} />
                 </div>
             </div>
                 </form>
