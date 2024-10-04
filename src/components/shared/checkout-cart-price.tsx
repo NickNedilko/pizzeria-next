@@ -9,12 +9,13 @@ import { Skeleton } from "../ui/skeleton";
 
 interface ICheckoutCartPriceProps {
     totalAmount: number;
+    submitting?: boolean;
     loading?: boolean;
 }
 
 const VAT = 15;
 const DELIVERY = 80;
-export const CheckoutCartPrice: FC<ICheckoutCartPriceProps> = ({ totalAmount, loading }) => {
+export const CheckoutCartPrice: FC<ICheckoutCartPriceProps> = ({ totalAmount, loading, submitting }) => {
     
     const vatPrice = (totalAmount * VAT) / 100;
     const delivery = totalAmount > 1000 ? 0 : DELIVERY;
@@ -42,7 +43,7 @@ export const CheckoutCartPrice: FC<ICheckoutCartPriceProps> = ({ totalAmount, lo
                             </div>
                         } value={loading? <Skeleton className="h-6 w-12"/> : `${delivery} ₴`}
                         />
-                        <Button className='w-full h-14 rounded-2xl mt-6 text-base font-bold'>
+                        <Button loading={submitting } className='w-full h-14 rounded-2xl mt-6 text-base font-bold'>
                             Сплатити
                             < FaArrowRight className='w-5 ml-2'/>
                         </Button>

@@ -1,6 +1,6 @@
 'use client'
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm, SubmitHandler, FormProvider } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
 import {  CheckoutCartPrice, CheckoutItem,  CheckoutSkeleton, Container, FormInput, Input, Textarea, Title, WhiteBlock } from '@/components';
@@ -8,6 +8,8 @@ import { useCart } from '@/hooks';
 import { CheckoutAddressForm, CheckoutCart, CheckoutPersonalForm } from '@/components/shared/checkout';
 import { checkoutFormSchema, CheckoutFormValues } from '@/components/shared/checkout/checkout-form-schema';
 import { cn } from '@/lib/utils';
+import { createOrder } from '@/app/actions';
+import toast from 'react-hot-toast';
 
 
 
@@ -16,7 +18,7 @@ interface ICheckooutPageProps {
 }
 
 const CheckooutPage: FC<ICheckooutPageProps> = (props) => {
-
+const [submitting, setSubmitting] = useState(false)
     const form = useForm<CheckoutFormValues>({
         resolver: zodResolver(checkoutFormSchema),
         defaultValues: {
@@ -29,8 +31,19 @@ const CheckooutPage: FC<ICheckooutPageProps> = (props) => {
         }
     });
  
-    const onSubmit: SubmitHandler<CheckoutFormValues> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
+        try {
+            setSubmitting(true);
+            const url = await createOrder(data)
+            toast.success('Заказ успішно оформлено! Перехід на оплату')
+
+            if (url) {
+                location.href = url;
+            }
+        } catch (error) {
+            setSubmitting(false)
+            toast.error('Не вийшло створити замовлення')
+        } 
     }
 
     const {totalAmount, items, onClickCountButton, deleteCartItem, loading } = useCart();
@@ -48,12 +61,12 @@ const CheckooutPage: FC<ICheckooutPageProps> = (props) => {
                         onClickCountButton={onClickCountButton }
                         deleteCartItem={deleteCartItem}/>
 
-            <CheckoutPersonalForm className={true? 'opacity-40 pointer-events-none' : ''} />
+                            <CheckoutPersonalForm className={true? 'opacity-40 pointer-events-none' : ''} />
                             <CheckoutAddressForm className={loading ? 'opacity-40 pointer-events-none' : ''} />
                             
                 </div>
                 <div className='w-[450px]'>
-                            <CheckoutCartPrice totalAmount={totalAmount} loading={loading} />
+                            <CheckoutCartPrice submitting={submitting} totalAmount={totalAmount} loading={loading} />
                 </div>
             </div>
                 </form>
