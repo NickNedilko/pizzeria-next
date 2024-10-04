@@ -26,3 +26,4 @@ export { ErrorText } from './error-text';
 export * from './header';
 export * from './modals';
 export * from './form';
+export * from './email-templates';

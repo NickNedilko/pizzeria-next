@@ -4,6 +4,8 @@ import { CheckoutFormValues } from "@/components/shared/checkout/checkout-form-s
 import { prisma } from "../../prisma/prisma-client";
 import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
+import { sendEmail } from "@/lib";
+import { PayOrderTemplate } from "@/components";
 
 export async function createOrder(data: CheckoutFormValues) {
     try {
@@ -68,7 +70,15 @@ export async function createOrder(data: CheckoutFormValues) {
                 cartId: userCart.id,
             }
         })
+       await sendEmail(data.email, 'Pizzeria Nick / Оплатіть замовлення №' + order.id, PayOrderTemplate({
+            orderId: order.id,
+            totalAmount: order.totalAmount,
+            paymentUrl: 'https://github.com/NickNedilko',
+            
+        }))
     } catch (error) {
-        // re_MLyVrSuF_8pFAxELYYeq8miJiv54yVWYX
+        console.log('[CreateOrder] Server error',error)
+        
     }
+ return order.paymentUrl
 }
