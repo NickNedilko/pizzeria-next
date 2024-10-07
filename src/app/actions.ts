@@ -6,6 +6,7 @@ import { OrderStatus } from "@prisma/client";
 import { cookies } from "next/headers";
 import { sendEmail } from "@/lib";
 import { PayOrderTemplate } from "@/components";
+import { fondyPayment } from "@/lib/fondy-payment";
 
 export async function createOrder(data: CheckoutFormValues) {
     try {
@@ -80,5 +81,8 @@ export async function createOrder(data: CheckoutFormValues) {
         console.log('[CreateOrder] Server error',error)
         
     }
- return order.paymentUrl
+
+    const order = await fondyPayment();
+    console.log(order)
+//  return order.paymentUrl
 }

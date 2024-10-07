@@ -10,6 +10,7 @@ import { checkoutFormSchema, CheckoutFormValues } from '@/components/shared/chec
 import { cn } from '@/lib/utils';
 import { createOrder } from '@/app/actions';
 import toast from 'react-hot-toast';
+import { fondyPayment} from '@/lib/fondy-payment';
 
 
 
@@ -32,6 +33,7 @@ const [submitting, setSubmitting] = useState(false)
     });
  
     const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
+
         try {
             setSubmitting(true);
             const url = await createOrder(data)
