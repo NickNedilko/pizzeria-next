@@ -49,7 +49,7 @@ const [submitting, setSubmitting] = useState(false)
     }
 
     const {totalAmount, items, onClickCountButton, deleteCartItem, loading } = useCart();
-
+     console.log(items)
     return (
         <Container className='mt-10'>
             <Title text='Оформлення замовлення' size='xl' className='font-extrabold mb-8' />

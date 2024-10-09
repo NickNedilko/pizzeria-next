@@ -57,6 +57,8 @@ export async function createOrder(data: CheckoutFormValues) {
             }
         });
 
+   
+
         await prisma.cart.update({
             where: {
             id: userCart.id,
@@ -71,18 +73,32 @@ export async function createOrder(data: CheckoutFormValues) {
                 cartId: userCart.id,
             }
         })
+
+        const orderLink = await fondyPayment(order.id, userCart.totalAmount);
+
        await sendEmail(data.email, 'Pizzeria Nick / Оплатіть замовлення №' + order.id, PayOrderTemplate({
             orderId: order.id,
-            totalAmount: order.totalAmount,
-            paymentUrl: 'https://github.com/NickNedilko',
+            totalAmount: userCart.totalAmount,
+            paymentUrl: orderLink.response.checkout_url,
             
-        }))
+       }))
+        if (orderLink.response.response_status === 'success') {
+            await prisma.order.update({
+                where: {
+                    id: order.id
+                },
+                data: {
+                    paymentId: orderLink.response.payment_id
+                }
+            })
+        }
+        
+      return orderLink.response.checkout_url
+        
     } catch (error) {
         console.log('[CreateOrder] Server error',error)
         
     }
 
-    const order = await fondyPayment();
-    console.log(order)
-//  return order.paymentUrl
+    
 }
