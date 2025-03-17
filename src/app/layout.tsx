@@ -1,6 +1,6 @@
-import  { Toaster } from 'react-hot-toast';
 import { Nunito } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/shared/providers";
 
 const nunito = Nunito({
   subsets: ['cyrillic'],
@@ -19,9 +19,8 @@ export default function RootLayout({
           <head>
               <link data-rh='true' rel="icon" href="/pizza.svg"/>
           </head>
-      <body className={nunito.className}>
-        {children}
-        <Toaster/>
+      <body className={nunito.className}>    
+      <Providers>{children}</Providers>
       </body>
     </html>
   );
