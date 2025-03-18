@@ -15,6 +15,7 @@ interface ILoginFormProps {
 
 export const LoginForm: FC<ILoginFormProps> = ({ onClose }) => {
     const form = useForm<TFormLoginValues>({
+        mode: 'onChange',
         resolver: zodResolver(formLoginSchema),
         defaultValues: {
             email: '',
@@ -43,10 +44,10 @@ export const LoginForm: FC<ILoginFormProps> = ({ onClose }) => {
     return <FormProvider {...form}>
         <form className='flex flex-col gap-5' onSubmit={form.handleSubmit(onSubmit)}>
             <div className='flex justify-between items-center'>
-                <Title text='Sign in' size='md' className='font-bold' />
+                {/* <Title text='Вхід в акаунт' size='md' className='font-bold' /> */}
                 <p className='text-gray-400'>Введіть свою пошту та пароль </p>
-            </div>
             <img src="/assets/images/phone-icon.png" alt="phone-icon"width={60} height={60} />
+            </div>
         
             <FormInput name='email' label='E-mail' placeholder='E-mail' required />
             <FormInput name='password' label='Password' placeholder='Password' type='password' required />

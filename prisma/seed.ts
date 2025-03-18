@@ -9,25 +9,6 @@ const randomPrice = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) * 10 + min * 10) / 10;
 };
 
-// const generateProductItem = ({
-//   productId,
-//   pizzaType,
-//   size,
-// }: {
-//   productId: number;
-//   pizzaType?: 1 | 2;
-//   size?: 20 | 30 | 40;
-// }) => {
-//   return {
-//     productId,
-//     price: randomPrice(100, 350),
-//     pizzaType,
-//     size,
-//   } as Prisma.ProductItemUncheckedCreateInput;
-  
-// };
-
-
 
 async function up() {
     
