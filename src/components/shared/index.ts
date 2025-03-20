@@ -23,6 +23,7 @@ export { CheckoutCartPrice } from './checkout-cart-price';
 export { ClearButton } from './clear-button';
 export { ErrorText } from './error-text';
 export { ProfileBtn } from './profile-btn';
+export { InfoBlock } from './info-block';
 // export { CountButton } from './count-button';
 export * from './header';
 export * from './modals';
