@@ -37,7 +37,7 @@ const currentItemId = items.find((item)=>item.pizzaType === type && size === ite
         if (!isAvailableSize && availableSize) {
         setSize(Number(availableSize.value) as PizzaSize)
     }
-     }, [type])
+     }, [availableSizes, size, type])
     
     return {size, type, currentItemId, selectedIngridients, availableSizes, setSize, setType, addIngridient}
 }

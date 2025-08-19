@@ -34,6 +34,7 @@ export const authOptions: AuthOptions = {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' },
       },
+     // @ts-ignore
       async authorize(credentials) {
         if (!credentials) {
           return null;
@@ -147,7 +148,9 @@ export const authOptions: AuthOptions = {
     },
     session({ session, token }) {
       if (session?.user) {
+        // @ts-ignore
         session.user.id = token.id;
+        // @ts-ignore
         session.user.role = token.role;
       }
 
