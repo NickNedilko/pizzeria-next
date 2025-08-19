@@ -47,7 +47,7 @@ async function up() {
     data: {
       name: 'Пеппероні фреш',
       imageUrl:
-        'https://media.dodostatic.net/image/r:233x233/11EE7D61304FAF5A98A6958F2BB2D260.webp',
+        '/assets/images/products/pepperoni-pizza.webp',
       categoryId: 1,
       ingridients: {
         connect: ingridients.slice(0, 5),
@@ -59,7 +59,7 @@ async function up() {
     data: {
       name: 'Сирна',
       imageUrl:
-        'https://media.dodostatic.net/image/r:233x233/11EE7D610CF7E265B7C72BE5AE757CA7.webp',
+        '/assets/images/products/cheese-pizza.webp',
       categoryId: 1,
       ingridients: {
         connect: ingridients.slice(5, 10),
@@ -71,7 +71,7 @@ async function up() {
     data: {
       name: 'Чорізо фреш',
       imageUrl:
-        'https://media.dodostatic.net/image/r:584x584/11EE7D61706D472F9A5D71EB94149304.webp',
+        '/assets/images/products/chorizo-pizza.webp',
       categoryId: 1,
       ingridients: {
         connect: ingridients.slice(10, 40),

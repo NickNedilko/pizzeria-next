@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Header } from "@/components";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Pizzeria-next",
@@ -8,16 +9,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal
+  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode
+  modal: React.ReactNode;
 }>) {
   return (
-        <main className="min-h-screen">
-          <Header hasSearch hasCart/>
+    <main className="min-h-screen">
+      <Suspense>
+        <Header hasSearch hasCart />
+      </Suspense>
       {children}
       {modal}
-        </main>
+    </main>
   );
 }
